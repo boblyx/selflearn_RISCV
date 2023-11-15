@@ -14,12 +14,23 @@ l1:
     li  a2, 13 # size_t of buffer
     li  a7, 64 # sys_write
     ecall
-
+    
+l2:
+    lui a1, %hi(buff)
+    addi a1, a1, %lo(l2)
     li  a0, stdin # file descriptor id
     li  a2, 5 # size_t of buffer
     li  a7, 63 # sys_read
     ecall
 
+l3:
+    lui a1, %hi(buff)
+    addi a1, a1, %lo(l3)
+    li a2, 5
+    li a3, 0
+    li a7, 64
+    ecall
+    
     # TODO: Print read message.
     
     li  a7, 93 # sys_exit
@@ -29,6 +40,6 @@ l1:
 .data
 msg:
     .string "Enter string\n"
-buf:
+buff:
     .zero 32
 
