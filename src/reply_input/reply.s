@@ -1,3 +1,7 @@
+# reply.s
+# 1. Show a prompt message
+# 2. Read stdin
+# 3. Output a combined message based on data read from stdin.
 .section .text
 .globl _start
 _start:
@@ -5,19 +9,21 @@ _start:
     .equ stdout, 1
     li  a0, stdout
 l1:
-    li a0, 1
-    la a1, msg
-    li a2, 13
-    li a7, 64
+    li  a0, 1 # file descriptor id
+    la  a1, msg # buffer
+    li  a2, 13 # size_t of buffer
+    li  a7, 64 # sys_write
     ecall
 
-    li a0, stdin
-    li a2, 5
-    li a7, 63
+    li  a0, stdin # file descriptor id
+    li  a2, 5 # size_t of buffer
+    li  a7, 63 # sys_read
     ecall
+
+    # TODO: Print read message.
     
-    li a7, 93
-    li a0, 13
+    li  a7, 93 # sys_exit
+    li  a0, 13
     ecall
 
 .data
