@@ -1,7 +1,6 @@
-#include<stdio.h>
+#include<unistd.h>
+#include<sys/syscall.h>
 int main(void){
-    char* myStr;
-    scanf("%s", &myStr);
-    printf("%s", &myStr);
+	syscall(SYS_write, 1, "Hello\n", 14);
     return 0;
 }

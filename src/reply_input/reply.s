@@ -22,10 +22,26 @@ L2:
     li  a7, 63 # sys_read
     ecall
 
-L3:
+# Get the size_t of the input buffer
+# WIP
+#L3:
+#  lui a0, %hi(buff)
+#  li t0, 0
+#
+#L3a:
+#  add t1, t0, a0
+#  lb t1, 0(t1)
+#  beqz t1, L3b
+#  addi t0, t0, 1
+#  j L3a
+#
+#L3b:
+#  mv a2, t0
+
+L4:
     lui a1, %hi(buff) # Load buffer into a1
     li a0, 1 # file descriptor id
-    li a2, 5 # size_t of buffer
+    #li a2, 5 # size_t of buffer
     li a7, 64 # sys_write
     ecall
     
